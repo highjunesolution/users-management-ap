@@ -6,6 +6,48 @@ import { Link, NavLink } from "react-router-dom";
 import { listUser } from "./apis/users";
 import Swal from "sweetalert2";
 
+const menuItem = [
+  {
+    id: 1,
+    name: "Home",
+    to: "/",
+  },
+  {
+    id: 2,
+    name: "Contact",
+    to: "/",
+  },
+  {
+    id: 3,
+    name: "Service",
+    to: "/",
+  },
+];
+
+const NavMenu = () => {
+  return (
+    <div className="flex justify-between items-center gap-x-4 h-full py-4">
+      <Link to={"/"} className="text-4xl cursor-pointer">
+        <FontAwesomeIcon icon={faApple} />
+      </Link>
+      <div className="flex-1 space-x-4">
+        {menuItem.map((item) => (
+          <Link
+            key={item.id}
+            to={item.to}
+            className="bg-gray-200 py-2 px-4 font-medium rounded-md"
+          >
+            {item.name}
+          </Link>
+        ))}
+      </div>
+      <div className="text-slate-500">
+        <FontAwesomeIcon icon={faPowerOff} />
+      </div>
+    </div>
+  );
+};
+
 const App = () => {
   useEffect(() => {
     Swal.fire({
@@ -40,29 +82,29 @@ const App = () => {
     <div className="flex flex-col min-h-screen bg-gray-100">
       <div className="bg-white">
         <div className="max-w-7xl mx-auto px-4 xl:px-0">
-          <div className="flex justify-between items-center gap-x-4 h-full py-4">
-            <Link to={"/"} className="text-4xl">
-              <FontAwesomeIcon icon={faApple} />
-            </Link>
-            <div className="flex-1 space-x-4">
-              <button className="bg-gray-200 py-2 px-4 font-medium rounded-md">
-                Home
-              </button>
-              <button className="bg-gray-200 py-2 px-4 font-medium rounded-md">
-                Home
-              </button>
-            </div>
-            <div className="text-slate-500">
-              <FontAwesomeIcon icon={faPowerOff} />
+          <NavMenu/>
+        </div>
+      </div>
+      <div className="flex-1">
+        <div className="max-w-7xl mx-auto px-4 xl:px-0 py-4">
+          <div className="bg-white rounded-md p-4">
+            <div className="">
+              <div>
+
+              <h1 className="text-md font-medium">User Manage</h1>
+              <p className="text-sm text-gray-400">Create user for action</p>
+              </div>
+              <div>
+                <button></button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="flex-1">Table</div>
       <div className="bg-white h-10">
         <div className="h-full flex justify-center items-center">
           <h1 className="text-sm text-gray-400">
-            Copy Right @2026 - Email highjunesolution@gmail.com
+            Copy right @2026 - Email highjunesolution@gmail.com
           </h1>
         </div>
       </div>
