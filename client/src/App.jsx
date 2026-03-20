@@ -1,54 +1,15 @@
-import { faApple } from "@fortawesome/free-brands-svg-icons";
-import { faPowerOff } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+
+import React, { useEffect, useState } from "react";
 import { listUser } from "./apis/users";
 import Swal from "sweetalert2";
+import { ToastContainer } from "react-toastify";
+import NavMenu from "./components/NavMenu";
+import ModalForm from "./components/ModalForm";
+import HeaderBadge from "./components/HeaderBadge";
 
-const menuItem = [
-  {
-    id: 1,
-    name: "Home",
-    to: "/",
-  },
-  {
-    id: 2,
-    name: "Contact",
-    to: "/",
-  },
-  {
-    id: 3,
-    name: "Service",
-    to: "/",
-  },
-];
-
-const NavMenu = () => {
-  return (
-    <div className="flex justify-between items-center gap-x-4 h-full py-4">
-      <Link to={"/"} className="text-4xl cursor-pointer">
-        <FontAwesomeIcon icon={faApple} />
-      </Link>
-      <div className="flex-1 space-x-4">
-        {menuItem.map((item) => (
-          <Link
-            key={item.id}
-            to={item.to}
-            className="bg-gray-200 py-2 px-4 font-medium rounded-md"
-          >
-            {item.name}
-          </Link>
-        ))}
-      </div>
-      <div className="text-slate-500">
-        <FontAwesomeIcon icon={faPowerOff} />
-      </div>
-    </div>
-  );
-};
 
 const App = () => {
+  const [modal, setModal] = useState(false);
   useEffect(() => {
     Swal.fire({
       title: "Loading...",
@@ -78,37 +39,40 @@ const App = () => {
         });
       });
   }, []);
-  return (
-    <div className="flex flex-col min-h-screen bg-gray-100">
-      <div className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 xl:px-0">
-          <NavMenu/>
-        </div>
-      </div>
-      <div className="flex-1">
-        <div className="max-w-7xl mx-auto px-4 xl:px-0 py-4">
-          <div className="bg-white rounded-md p-4">
-            <div className="">
-              <div>
 
-              <h1 className="text-md font-medium">User Manage</h1>
-              <p className="text-sm text-gray-400">Create user for action</p>
-              </div>
-              <div>
-                <button></button>
-              </div>
-            </div>
+  return (
+    <>
+      <div className="flex flex-col min-h-screen bg-gray-100">
+        <div className="bg-white">
+          <div className="max-w-7xl mx-auto px-4 xl:px-0">
+            <NavMenu/>
+          </div>
+        </div>
+        <div className="flex-1">
+          <div className="max-w-7xl mx-auto px-4 xl:px-0 py-4 space-y-4">
+            <HeaderBadge modal={modal} setModal={setModal} />
+            <div className="bg-white rounded-xl px-4 py-4"> table</div>
+          </div>
+
+          {/* Modal Component*/}
+          {modal && (
+            <ModalForm
+              modal={modal}
+              setModal={setModal}
+              onClose={() => setModal(!modal)}
+            />
+          )}
+        </div>
+        <div className="bg-white h-10">
+          <div className="h-full flex justify-center items-center">
+            <h1 className="text-sm text-gray-400">
+              Copy right @2026 - MIS Division
+            </h1>
           </div>
         </div>
       </div>
-      <div className="bg-white h-10">
-        <div className="h-full flex justify-center items-center">
-          <h1 className="text-sm text-gray-400">
-            Copy right @2026 - Email highjunesolution@gmail.com
-          </h1>
-        </div>
-      </div>
-    </div>
+      <ToastContainer position="top-right" limit={5} />
+    </>
   );
 };
 
