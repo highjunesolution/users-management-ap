@@ -1,3 +1,18 @@
+const registerNotifyEmail = (data) => {
+  const skillTags = data.skills
+    ? data.skills
+        .split(",")
+        .map(
+          (s) =>
+            `<span style="display:inline-block;background:#dcfce7;color:#166534;font-size:12px;padding:3px 10px;border-radius:20px;margin:3px;">${s.trim()}</span>`,
+        )
+        .join("")
+    : "";
+
+  const avatarLetter = data.firstName ? data.firstName.charAt(0) : "U";
+  const avatarColor = data.avatar || "#3b82f6";
+
+  return `
 <!doctype html>
 <html lang="th">
   <head>
@@ -111,8 +126,9 @@
                         สวัสดี, ${data.firstName} ${data.lastName}!
                       </p>
                       <p style="margin: 0; font-size: 13px; color: #6b7280">
-                        @${data.username || ""} &nbsp;·&nbsp; ${data.jobType ||
-                        ""}
+                        @${data.username || ""} &nbsp;·&nbsp; ${
+                          data.jobType || ""
+                        }
                       </p>
                     </td>
                   </tr>
@@ -159,10 +175,16 @@
                       </span>
                     </td>
                   </tr>
-                  ${[ ["ชื่อ-นามสกุล", `${data.firstName} ${data.lastName}`],
-                  ["อีเมล", data.email], ["เบอร์โทร", data.phone], ["เพศ",
-                  data.gender], ["สัญชาติ", data.nationality], ["จังหวัด",
-                  data.province], ] .map( ([label, value]) => `
+                  ${[
+                    ["ชื่อ-นามสกุล", `${data.firstName} ${data.lastName}`],
+                    ["อีเมล", data.email],
+                    ["เบอร์โทร", data.phone],
+                    ["เพศ", data.gender],
+                    ["สัญชาติ", data.nationality],
+                    ["จังหวัด", data.province],
+                  ]
+                    .map(
+                      ([label, value]) => `
                   <tr>
                     <td
                       style="
@@ -185,7 +207,9 @@
                       ${value || "-"}
                     </td>
                   </tr>
-                  ` ) .join("")}
+                  `,
+                    )
+                    .join("")}
                 </table>
 
                 <!-- Education & Skills -->
@@ -216,9 +240,14 @@
                       </span>
                     </td>
                   </tr>
-                  ${[ ["ระดับการศึกษา", data.education], ["สาขา", data.major],
-                  ["มหาวิทยาลัย", data.school], ["เกรดเฉลี่ย", data.gpa], ]
-                  .map( ([label, value]) => `
+                  ${[
+                    ["ระดับการศึกษา", data.education],
+                    ["สาขา", data.major],
+                    ["มหาวิทยาลัย", data.school],
+                    ["เกรดเฉลี่ย", data.gpa],
+                  ]
+                    .map(
+                      ([label, value]) => `
                   <tr>
                     <td
                       style="
@@ -234,7 +263,9 @@
                       ${value || "-"}
                     </td>
                   </tr>
-                  ` ) .join("")}
+                  `,
+                    )
+                    .join("")}
                   <tr>
                     <td
                       colspan="2"
@@ -297,3 +328,7 @@
     </table>
   </body>
 </html>
+`;
+};
+
+module.exports = { registerNotifyEmail };

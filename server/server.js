@@ -10,7 +10,8 @@ const PORT = process.env.PORT || 3000;
 const fs = require('fs')
 
 // Step 4 Use Middlewares
-app.use(cors({ origin: 'http://localhost:5173' }));
+// app.use(cors({ origin: 'http://127.0.0.1:5500' }));
+app.use(cors());
 app.use(morgan("dev"))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))

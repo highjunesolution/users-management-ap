@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
 
 const sendEmail = async (to, subject, html) => {
     await transporter.sendMail({
-        from: `"IT System" <${process.env.EMAIL_USER}>`,
+        from: `"MIS No-reply" <${process.env.EMAIL_USER}>`,
         to,
         subject,
         html
